@@ -1,19 +1,3 @@
-## Build
-```
-go build
-```
-
-## Usage:
-```
-wallex_bot [OPTIONS]
-```
-
-**Options:**
-```
-  -t string
-        telegram bot token
-```
-
 ## Example
 **Docker:**
 ```
