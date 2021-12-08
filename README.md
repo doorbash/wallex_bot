@@ -20,7 +20,7 @@ wallex_bot [OPTIONS]
 ```
 **Docker:**
 ```
-docker run --name wallex_bot --restart always -d ghcr.io/doorbash/wallex_bot -t AAAAAAAAAAAAAA
+docker run --name wallex_bot --restart always -d -e TOKEN=AAAAAAAAAAAAAA ghcr.io/doorbash/wallex_bot
 ```
 **Docker-Compose:**
 ```
