@@ -6,18 +6,21 @@ import (
 )
 
 type ApiBot struct {
-	interval time.Duration
-	stop     chan struct{}
-	data     map[string]Market
+	interval      time.Duration
+	stop          chan struct{}
+	data          map[string]Market
+	lastFetchTime time.Time
 }
 
-func (a *ApiBot) getPrices() {
+func (a *ApiBot) fetch() {
 	log.Println("Api: get()")
 	var err error
 	a.data, err = GetMarkets()
 	if err != nil {
 		log.Println(err)
+		return
 	}
+	a.lastFetchTime = time.Now()
 }
 
 func (a *ApiBot) run() {
@@ -25,7 +28,7 @@ func (a *ApiBot) run() {
 	for {
 		select {
 		case <-time.Tick(a.interval):
-			a.getPrices()
+			a.fetch()
 		case <-a.stop:
 			log.Println("returning run")
 			return

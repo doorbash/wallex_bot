@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,7 +12,15 @@ import (
 )
 
 func main() {
-	apiBot := NewApiBot(5 * time.Second)
+	var interval int
+	flag.IntVar(&interval, "i", 5, "fetch interval in seconds")
+	flag.Parse()
+
+	if interval < 5 || interval > 60 {
+		log.Fatalln("interval must be between 5 and 60")
+	}
+
+	apiBot := NewApiBot(time.Duration(interval) * time.Second)
 
 	telegramBot, err := tb.NewBot(tb.Settings{
 		Token:  os.Getenv("TOKEN"),
@@ -19,11 +28,14 @@ func main() {
 	})
 
 	if err != nil {
-		log.Fatal(err)
-		return
+		log.Fatalln(err)
 	}
 
 	telegramBot.Handle(tb.OnText, func(m *tb.Message) {
+		if time.Since(apiBot.lastFetchTime).Minutes() >= 2 {
+			telegramBot.Send(m.Sender, "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید")
+			return
+		}
 		tmnMarket := apiBot.data["TMN"]
 		var sb strings.Builder
 		sb.WriteString("آخرین قیمت‌ها در بازار والکس:\n")
