@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"log"
+	"os"
 	"strings"
 	"time"
 
@@ -10,13 +10,10 @@ import (
 )
 
 func main() {
-	token := flag.String("t", "", "telegram bot token")
-	flag.Parse()
-
 	apiBot := NewApiBot(5 * time.Second)
 
 	telegramBot, err := tb.NewBot(tb.Settings{
-		Token:  *token,
+		Token:  os.Getenv("BOT_TOKEN"),
 		Poller: &tb.LongPoller{Timeout: 5 * time.Second},
 	})
 
@@ -35,8 +32,6 @@ func main() {
 		// }
 		s := tmnMarket["USDT"]
 		sb.WriteString(s.GetPricesTxt())
-		sb.WriteString("\n")
-		sb.WriteString("@wallex_api_bot")
 
 		telegramBot.Send(m.Sender, sb.String())
 	})
