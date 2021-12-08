@@ -22,3 +22,11 @@ wallex_bot [OPTIONS]
 ```
 docker run --name wallex_bot --restart always -d ghcr.io/doorbash/wallex_bot -t AAAAAAAAAAAAAA
 ```
+**Docker-Compose:**
+```
+wallex_bot:
+    restart: always
+    environment:
+      - TOKEN=AAAAAAAAAAAAAA
+    image: ghcr.io/doorbash/wallex_bot
+```
