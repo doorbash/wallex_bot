@@ -13,7 +13,7 @@ func main() {
 	apiBot := NewApiBot(5 * time.Second)
 
 	telegramBot, err := tb.NewBot(tb.Settings{
-		Token:  os.Getenv("BOT_TOKEN"),
+		Token:  os.Getenv("TOKEN"),
 		Poller: &tb.LongPoller{Timeout: 5 * time.Second},
 	})
 
