@@ -5,7 +5,7 @@ docker run --name wallex_bot --restart always -d -e TOKEN=AAAAAAAAAAAAAA -e USER
 ```
 **Docker-Compose:**
 ```
-wallex_bot:
+  wallex_bot:
     restart: always
     environment:
       - TOKEN=AAAAAAAAAAAAAA
