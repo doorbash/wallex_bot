@@ -1,3 +1,18 @@
+## Build
+```
+go build
+```
+
+## Usage:
+```
+wallex_bot [OPTIONS]
+```
+
+**Options:**
+```
+  -i int
+        fetch interval in seconds (default 5)
+```
 ## Example
 **Docker:**
 ```
