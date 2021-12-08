@@ -50,7 +50,7 @@ func (s Symbol) GetPricesTxt() string {
 
 func (s Symbol) GetPricesWith24chTxt() string {
 	return fmt.Sprintf(`
-*%s: (%.2f%s)*
+<b>%s: (%.2f%s)</b>
 قیمت فروش: %s %s
 قیمت خرید: %s %s
 `, s.FaBaseAsset, s.Stats.Two4HCh, "%", s.GetAsk(), s.FaQuoteAsset, s.GetBid(), s.FaQuoteAsset)

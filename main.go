@@ -38,7 +38,7 @@ func main() {
 		}
 		tmnMarket := apiBot.data["TMN"]
 		var sb strings.Builder
-		sb.WriteString("*آخرین قیمت‌ها در بازار والکس:*\n")
+		sb.WriteString("<b>آخرین قیمت‌ها در بازار والکس:</b>\n")
 		// for _, s := range tmnMarket {
 		// 	sb.WriteString(s.GetPricesTxt())
 		// 	sb.WriteString("\n\n")
@@ -48,7 +48,7 @@ func main() {
 		sb.WriteString("\n")
 		sb.WriteString(fmt.Sprintf("@%s", os.Getenv("USERNAME")))
 
-		telegramBot.Send(m.Sender, sb.String(), tb.ModeMarkdown)
+		telegramBot.Send(m.Sender, sb.String(), tb.ModeHTML)
 	})
 
 	apiBot.Start()
