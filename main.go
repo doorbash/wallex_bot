@@ -33,12 +33,12 @@ func main() {
 
 	telegramBot.Handle(tb.OnText, func(m *tb.Message) {
 		if time.Since(apiBot.lastFetchTime).Minutes() >= 2 {
-			telegramBot.Send(m.Sender, "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید")
+			telegramBot.Send(m.Sender, "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید.")
 			return
 		}
 		tmnMarket := apiBot.data["TMN"]
 		var sb strings.Builder
-		sb.WriteString("آخرین قیمت‌ها در بازار والکس:\n")
+		sb.WriteString("*آخرین قیمت‌ها در بازار والکس:*\n")
 		// for _, s := range tmnMarket {
 		// 	sb.WriteString(s.GetPricesTxt())
 		// 	sb.WriteString("\n\n")
@@ -48,7 +48,7 @@ func main() {
 		sb.WriteString("\n")
 		sb.WriteString(fmt.Sprintf("@%s", os.Getenv("USERNAME")))
 
-		telegramBot.Send(m.Sender, sb.String())
+		telegramBot.Send(m.Sender, sb.String(), tb.ModeMarkdown)
 	})
 
 	apiBot.Start()
