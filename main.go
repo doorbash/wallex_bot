@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -31,7 +32,9 @@ func main() {
 		// 	sb.WriteString("\n\n")
 		// }
 		s := tmnMarket["USDT"]
-		sb.WriteString(s.GetPricesTxt())
+		sb.WriteString(s.GetPricesWith24chTxt())
+		sb.WriteString("\n")
+		sb.WriteString(fmt.Sprintf("@%s", os.Getenv("USERNAME")))
 
 		telegramBot.Send(m.Sender, sb.String())
 	})
