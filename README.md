@@ -15,12 +15,9 @@ wallex_bot [OPTIONS]
 ```
 
 ## Example
-```
-./wallex_bot -t AAAAAAAAAAAAAA
-```
 **Docker:**
 ```
-docker run --name wallex_bot --restart always -d -e TOKEN=AAAAAAAAAAAAAA ghcr.io/doorbash/wallex_bot
+docker run --name wallex_bot --restart always -d -e TOKEN=AAAAAAAAAAAAAA -e USERNAME=wallex_api_bot ghcr.io/doorbash/wallex_bot
 ```
 **Docker-Compose:**
 ```
@@ -28,5 +25,6 @@ wallex_bot:
     restart: always
     environment:
       - TOKEN=AAAAAAAAAAAAAA
+      - USERNAME=wallex_api_bot
     image: ghcr.io/doorbash/wallex_bot
 ```
