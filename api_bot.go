@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"os"
 	"strings"
 	"time"
 )
@@ -19,7 +17,6 @@ type ApiBot struct {
 func (a *ApiBot) updateText() {
 	tmnMarket := a.data["TMN"]
 	var sb strings.Builder
-	sb.WriteString("<b>آخرین قیمت‌ها در بازار والکس:</b>\n")
 	// for _, s := range tmnMarket {
 	// 	sb.WriteString(s.GetPricesTxt())
 	// 	sb.WriteString("\n\n")
@@ -27,7 +24,6 @@ func (a *ApiBot) updateText() {
 	s := tmnMarket["USDT"]
 	sb.WriteString(s.GetPricesWith24chTxt())
 	sb.WriteString("\n")
-	sb.WriteString(fmt.Sprintf("@%s", os.Getenv("USERNAME")))
 	a.text = sb.String()
 }
 
