@@ -2,10 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
-	"strings"
 	"time"
 
 	tb "gopkg.in/tucnak/telebot.v2"
@@ -32,23 +30,11 @@ func main() {
 	}
 
 	telegramBot.Handle(tb.OnText, func(m *tb.Message) {
-		if time.Since(apiBot.lastFetchTime).Minutes() >= 2 {
+		if apiBot.text == "" || time.Since(apiBot.lastFetchTime).Minutes() >= 2 {
 			telegramBot.Send(m.Sender, "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید.")
 			return
 		}
-		tmnMarket := apiBot.data["TMN"]
-		var sb strings.Builder
-		sb.WriteString("<b>آخرین قیمت‌ها در بازار والکس:</b>\n")
-		// for _, s := range tmnMarket {
-		// 	sb.WriteString(s.GetPricesTxt())
-		// 	sb.WriteString("\n\n")
-		// }
-		s := tmnMarket["USDT"]
-		sb.WriteString(s.GetPricesWith24chTxt())
-		sb.WriteString("\n")
-		sb.WriteString(fmt.Sprintf("@%s", os.Getenv("USERNAME")))
-
-		telegramBot.Send(m.Sender, sb.String(), tb.ModeHTML)
+		telegramBot.Send(m.Sender, apiBot.text, tb.ModeHTML)
 	})
 
 	apiBot.Start()
