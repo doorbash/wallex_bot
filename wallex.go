@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 )
@@ -27,19 +26,16 @@ func GetMarkets() (map[string]Market, error) {
 	req, err := http.NewRequest("GET", url, nil)
 
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	res, err := client.Do(req)
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	var r JsonObject

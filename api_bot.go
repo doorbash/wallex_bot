@@ -32,7 +32,6 @@ func (a *ApiBot) updateText() {
 }
 
 func (a *ApiBot) fetch() {
-	log.Println("Api: get()")
 	var err error
 	a.data, err = GetMarkets()
 	if err != nil {
@@ -44,27 +43,23 @@ func (a *ApiBot) fetch() {
 }
 
 func (a *ApiBot) run() {
-	log.Println("Api: run()")
 	for {
 		select {
 		case <-time.Tick(a.interval):
 			a.fetch()
 		case <-a.stop:
-			log.Println("returning run")
 			return
 		}
 	}
 }
 
 func (a *ApiBot) Start() {
-	log.Println("Api: Start()")
 	a.Stop()
 	a.stop = make(chan struct{})
 	go a.run()
 }
 
 func (a *ApiBot) Stop() {
-	log.Println("Api: Stop()")
 	if a.stop != nil {
 		close(a.stop)
 	}
