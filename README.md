@@ -5,7 +5,7 @@ go build
 
 ## Usage:
 ```
-wallex_bot [OPTIONS]
+TOKEN=AAAAAAAAAAAAAA USERNAME=wallex_api_bot ./wallex_bot [OPTIONS]
 ```
 
 **Options:**
