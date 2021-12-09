@@ -51,8 +51,8 @@ func main() {
 	})
 
 	telegramBot.Handle(tb.OnQuery, func(q *tb.Query) {
-		market := apiBot.data["TMN"]
 		results := make(tb.Results, 0)
+		market := apiBot.data["TMN"]
 		keys := make([]string, 0)
 		for k, _ := range market {
 			keys = append(keys, k)
@@ -64,14 +64,15 @@ func main() {
 			if q.Text != "" && !strings.Contains(ii, strings.ToLower(q.Text)) {
 				continue
 			}
-			result := &tb.PhotoResult{
-				Title:    v.BaseAsset,
-				Caption:  v.FaBaseAsset,
-				URL:      fmt.Sprintf("https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/%s.png", ii),
-				ThumbURL: fmt.Sprintf("https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/%s.png", ii),
+			result := &tb.ArticleResult{
+				Title:       v.Symbol,
+				Description: fmt.Sprintf("%s %s\n%s %s", v.GetAsk(), v.FaQuoteAsset, v.GetBid(), v.FaQuoteAsset),
+				HideURL:     true,
+				URL:         fmt.Sprintf("https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/%s.png", ii),
+				ThumbURL:    fmt.Sprintf("https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/%s.png", ii),
 			}
 			result.SetContent(&tb.InputTextMessageContent{
-				Text:      fmt.Sprintf("%s\n%s", v.GetPricesWith24chTxt(), messageFooter),
+				Text:      fmt.Sprintf("<b>آخرین قیمت %s در والکس:</b>\n\n%s\n%s", v.FaBaseAsset, v.GetPricesTxt(), messageFooter),
 				ParseMode: tb.ModeHTML,
 			})
 			result.SetResultID(i)

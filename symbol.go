@@ -41,11 +41,9 @@ func (s Symbol) GetAsk() string {
 }
 
 func (s Symbol) GetPricesTxt() string {
-	return fmt.Sprintf(`
-%s:
-قیمت فروش: %s %s
+	return fmt.Sprintf(`قیمت فروش: %s %s
 قیمت خرید: %s %s
-`, s.FaBaseAsset, s.GetAsk(), s.FaQuoteAsset, s.GetBid(), s.FaQuoteAsset)
+`, s.GetAsk(), s.FaQuoteAsset, s.GetBid(), s.FaQuoteAsset)
 }
 
 func (s Symbol) GetPricesWith24chTxt() string {
