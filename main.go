@@ -30,8 +30,7 @@ func main() {
 	}
 
 	telegramBot.Handle(tb.OnText, func(m *tb.Message) {
-		log.Printf("message from %d (%s %s): %s", m.Sender.ID, m.Sender.FirstName, m.Sender.LastName, m.Text)
-		log.Println()
+		log.Printf("message from %d (%s %s): %s\n", m.Sender.ID, m.Sender.FirstName, m.Sender.LastName, m.Text)
 		if apiBot.text == "" || time.Since(apiBot.lastFetchTime).Minutes() >= 2 {
 			telegramBot.Send(m.Sender, "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید.")
 			return
